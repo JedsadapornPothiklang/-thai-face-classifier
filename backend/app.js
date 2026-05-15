@@ -7,8 +7,9 @@ const errorHandler = require('./middleware/errorHandler');
 const app = express();
 
 // ── CORS ────────────────────────────────────────────────────────────────────
+const allowedOrigin = process.env.ALLOWED_ORIGIN || 'http://localhost:5173';
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGIN || 'http://localhost:5173',
+  origin: allowedOrigin === '*' ? '*' : allowedOrigin,
   methods: ['POST', 'GET'],
 }));
 

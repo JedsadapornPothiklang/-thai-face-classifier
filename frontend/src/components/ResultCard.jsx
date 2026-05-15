@@ -1,11 +1,20 @@
 import ConfidenceBar from './ConfidenceBar';
 
 const REGION_META = {
-  Northern:     { emoji: '⛰️', bg: 'from-green-500 to-emerald-600',     text: 'Chiang Mai · Chiang Rai · Lamphun',        badge: 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' },
-  Northeastern: { emoji: '🌾', bg: 'from-orange-500 to-amber-500',      text: 'Khon Kaen · Udon Thani · Nakhon Ratchasima', badge: 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300' },
-  Central:      { emoji: '🏙️', bg: 'from-blue-500 to-indigo-600',       text: 'Bangkok · Ayutthaya · Nakhon Pathom',       badge: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' },
-  Southern:     { emoji: '🌊', bg: 'from-teal-500 to-cyan-500',         text: 'Phuket · Surat Thani · Hat Yai',            badge: 'bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300' },
+  Northern:     { emoji: '⛰️', bg: 'from-green-500 to-emerald-600',  badge: 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300',
+    provinces: ['Chiang Mai','Chiang Rai','Lamphun','Lampang','Phrae','Nan','Phayao','Mae Hong Son','Uttaradit','Tak','Sukhothai','Kamphaeng Phet','Phitsanulok','Phichit','Phetchabun'] },
+  Northeastern: { emoji: '🌾', bg: 'from-orange-500 to-amber-500',   badge: 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300',
+    provinces: ['Khon Kaen','Udon Thani','Nakhon Ratchasima','Ubon Ratchathani','Buriram','Surin','Sisaket','Roi Et','Maha Sarakham','Kalasin','Sakon Nakhon','Nakhon Phanom','Mukdahan','Loei','Nong Khai','Chaiyaphum','Yasothon','Amnat Charoen','Nong Bua Lamphu','Bung Kan'] },
+  Central:      { emoji: '🏙️', bg: 'from-blue-500 to-indigo-600',    badge: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
+    provinces: ['Bangkok','Ayutthaya','Nakhon Pathom','Nonthaburi','Pathum Thani','Samut Prakan','Samut Sakhon','Samut Songkhram','Ang Thong','Sing Buri','Chai Nat','Lop Buri','Saraburi','Nakhon Nayok','Suphan Buri','Kanchanaburi','Ratchaburi','Phetchaburi','Prachuap Khiri Khan'] },
+  Southern:     { emoji: '🌊', bg: 'from-teal-500 to-cyan-500',      badge: 'bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300',
+    provinces: ['Phuket','Surat Thani','Hat Yai','Songkhla','Krabi','Trang','Nakhon Si Thammarat','Phatthalung','Satun','Pattani','Yala','Narathiwat','Chumphon','Ranong','Phang Nga'] },
 };
+
+function pick3(provinces) {
+  const shuffled = [...provinces].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 3).join(' · ');
+}
 
 export default function ResultCard({ result }) {
   const meta = REGION_META[result.region] || { emoji: '🗺️', bg: 'from-gray-500 to-gray-600', text: '', badge: 'bg-gray-100 text-gray-700' };
@@ -34,7 +43,7 @@ export default function ResultCard({ result }) {
             <span className="text-6xl drop-shadow-lg">{meta.emoji}</span>
             <div>
               <h2 className="text-3xl font-extrabold tracking-tight drop-shadow">{result.region}</h2>
-              <p className="text-sm opacity-75 mt-0.5">{meta.text}</p>
+              <p className="text-sm opacity-75 mt-0.5">{pick3(meta.provinces)}</p>
             </div>
           </div>
           <div className="mt-4">
