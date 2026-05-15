@@ -1,5 +1,4 @@
-[phases.setup]
-nixPkgs = ["python3", "python312Packages.pip"]
+providers = ["node", "python"]
 
 [phases.install]
 cmds = ["npm ci", "pip3 install -r requirements.txt"]
