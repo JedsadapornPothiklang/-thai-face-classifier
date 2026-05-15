@@ -14,7 +14,10 @@ export async function predictFace(imageFile) {
 
   try {
     const { data } = await axios.post(`${BASE_URL}/predict`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'ngrok-skip-browser-warning': 'true',
+      },
       timeout: 120000,
     });
     return data;
