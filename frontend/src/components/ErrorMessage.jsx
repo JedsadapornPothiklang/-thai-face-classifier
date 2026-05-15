@@ -10,8 +10,9 @@ const FRIENDLY_MESSAGES = {
 };
 
 export default function ErrorMessage({ error, onRetry }) {
-  const code = error?.code || error?.error;
-  const message = FRIENDLY_MESSAGES[code] || error?.message || 'Something went wrong. Please try again.';
+  const rawCode = error?.code || error?.error;
+  const code = typeof rawCode === 'string' ? rawCode : 'ERROR';
+  const message = FRIENDLY_MESSAGES[code] || (typeof error?.message === 'string' ? error.message : 'Something went wrong. Please try again.');
 
   return (
     <div className="card border-red-200/70 dark:border-red-900/50 animate-fade-in overflow-hidden">
